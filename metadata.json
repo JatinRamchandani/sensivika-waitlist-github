@@ -1,0 +1,5 @@
+{
+  "name": "Sensivika Waitlist",
+  "description": "A futuristic waitlist website for Sensivika, a product that connects the human brain to the internet. Collects emails and displays the waitlist count.",
+  "requestFramePermissions": []
+}

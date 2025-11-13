@@ -5,16 +5,27 @@ const NeuralNetBackground: React.FC = () => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        if (!canvas || !canvas.parentElement) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
+        
+        const setCanvasDimensions = () => {
+            if (!canvas || !canvas.parentElement) return { width: 0, height: 0 };
+            const newWidth = canvas.parentElement.offsetWidth;
+            const newHeight = canvas.parentElement.offsetHeight;
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            return { width: newWidth, height: newHeight };
+        };
 
-        let width = (canvas.width = window.innerWidth);
-        let height = (canvas.height = window.innerHeight);
+        let { width, height } = setCanvasDimensions();
+        if(width === 0 || height === 0) return;
+
 
         let particles: Particle[] = [];
-        const particleCount = Math.floor((width * height) / 25000);
+        // Use a larger denominator to keep particle count reasonable on a very tall canvas
+        const PARTICLE_DENSITY_FACTOR = 27000;
         const maxDistance = 220;
 
         const mouse = {
@@ -49,13 +60,14 @@ const NeuralNetBackground: React.FC = () => {
                 if (!ctx) return;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(107, 237, 255, 0.8)';
+                ctx.fillStyle = 'rgba(3, 143, 162, 0.8)';
                 ctx.fill();
             }
         }
 
         const init = () => {
             particles = [];
+            const particleCount = Math.floor((width * height) / PARTICLE_DENSITY_FACTOR);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -73,7 +85,7 @@ const NeuralNetBackground: React.FC = () => {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(107, 237, 255, ${1 - distance / maxDistance})`;
+                        ctx.strokeStyle = `rgba(3, 143, 162, ${1 - distance / maxDistance})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -91,7 +103,7 @@ const NeuralNetBackground: React.FC = () => {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = `rgba(107, 237, 255, ${0.5 * (1 - distance / (maxDistance * 1.5))})`;
+                        ctx.strokeStyle = `rgba(3, 143, 162, ${0.5 * (1 - distance / (maxDistance * 1.5))})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                  }
@@ -115,12 +127,12 @@ const NeuralNetBackground: React.FC = () => {
         };
 
         const handleResize = () => {
-            if (!canvas) return;
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            const newParticleCount = Math.floor((width * height) / 25000);
-            if(newParticleCount > particles.length) {
-                for (let i = 0; i < newParticleCount - particles.length; i++) {
+            ({ width, height } = setCanvasDimensions());
+            const newParticleCount = Math.floor((width * height) / PARTICLE_DENSITY_FACTOR);
+            const currentParticleCount = particles.length;
+
+            if (newParticleCount > currentParticleCount) {
+                for (let i = 0; i < newParticleCount - currentParticleCount; i++) {
                     particles.push(new Particle());
                 }
             } else {
@@ -130,7 +142,7 @@ const NeuralNetBackground: React.FC = () => {
 
         const handleMouseMove = (event: MouseEvent) => {
             mouse.x = event.clientX;
-            mouse.y = event.clientY;
+            mouse.y = event.clientY + window.scrollY;
         };
         
         const handleMouseOut = () => {
@@ -153,7 +165,7 @@ const NeuralNetBackground: React.FC = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />;
+    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full -z-10" />;
 };
 
 export default NeuralNetBackground;

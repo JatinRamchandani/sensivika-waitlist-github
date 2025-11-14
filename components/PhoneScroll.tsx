@@ -2,21 +2,25 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GoogleIcon, FingerprintIcon, SparklesIcon, PlusIcon, BellIcon, CheckCircleIcon, CloseIcon, ArrowRightIcon } from './Icons';
-import Logo from "./Logo";
+import logo from '../public/favicon.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LoginScreen: React.FC = () => (
-    <div className="w-full h-full bg-gray-900 flex flex-col items-center justify-center px-6 pb-6 pt-14 text-white text-center animate-screen-in">
-      <div className="mb-8">
-        <span className="text-4xl font-bold tracking-wider text-gray-200 group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 transition-colors duration-300">
+    <div className="w-full h-full bg-[linear-gradient(to_bottom,#00172d,#000000)] flex flex-col items-center justify-center px-6 pb-6 pt-14 text-white text-center animate-screen-in">
+        <img src={logo} alt="Sensivika Logo" className="mb-10 w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
+        />
+      <div className="mb-7">
+        <span className="text-3xl md:text-4xl font-bold tracking-wider text-gray-200 group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 transition-colors duration-300">
             Sensivika
         </span>
       </div>
-      <p className="text-gray-400 mb-12">Connect your node!</p>
-      <button className="w-full bg-white text-black font-semibold py-3 px-4 rounded-lg flex items-center justify-center mb-6 transition-transform hover:scale-105 text-sm">
+  
+      <button className="w-full bg-white text-black font-semibold py-3 px-2 rounded-lg flex items-center justify-center mb-2 transition-transform hover:scale-105 text-sm">
         <GoogleIcon className="w-5 h-5 mr-3" />
-        Sign in with Google
+        <span className="text-xs md:text-sm">
+            Sign in with Google
+        </span>
       </button>
 
       <p className="text-gray-500 mb-4 text-xs">or use biometrics</p>
@@ -24,7 +28,7 @@ const LoginScreen: React.FC = () => (
 );
 
 const HomeScreen: React.FC = () => (
-    <div className="w-full h-full bg-gray-900 text-white pt-14 flex flex-col animate-screen-in">
+    <div className="w-full h-full bg-[linear-gradient(to_bottom,#00172d,#000000)] text-white pt-14 flex flex-col animate-screen-in">
         <header className="flex justify-between items-center mb-6 px-6 flex-shrink-0">
             <div>
                 <p className="text-gray-400 text-sm">Welcome back,</p>
@@ -35,11 +39,11 @@ const HomeScreen: React.FC = () => (
         <main className="flex-grow px-6 pb-6 overflow-y-auto">
             <div className="bg-gray-800/50 p-4 rounded-lg mb-4">
                 <h2 className="font-bold mb-1 flex items-center"><SparklesIcon className="w-5 h-5 mr-2 text-yellow-400"/> Daily Briefing</h2>
-                <p className="text-gray-300 text-sm">Summary of your key topics and new insights.</p>
+                <p className="text-gray-300 text-xs md:text-sm">Summary of your key topics and new insights.</p>
             </div>
             <div className="bg-gray-800/50 p-4 rounded-lg">
                 <h2 className="font-bold mb-1">Knowledge Streams</h2>
-                 <p className="text-gray-300 text-sm">AI, Quantum Computing, Stock Analysis and 3 more active.</p>
+                 <p className="text-gray-300 text-xs md:text-sm">AI, Quantum Computing, Stock Analysis and 3 more active.</p>
             </div>
         </main>
     </div>
@@ -53,19 +57,19 @@ const TopicsScreen: React.FC = () => (
     }}>
       <div className="pt-14 flex flex-col h-full bg-black/50 backdrop-blur-sm">
         <header className="flex items-center gap-2 mb-4 px-6 flex-shrink-0">
-          <div className="bg-indigo-600 px-3 py-1 rounded-lg flex items-center gap-2 text-sm font-semibold">
+          <div className="bg-indigo-600 px-3 py-1 rounded-lg flex items-center gap-2 text-xs md:text-sm font-semibold">
             <span>Docker</span>
             <button className="text-indigo-200 hover:text-white"><CloseIcon className="w-4 h-4" /></button>
           </div>
-          <button className="bg-gray-800/80 hover:bg-gray-700/80 px-3 py-1 rounded-lg flex items-center gap-2 text-sm font-semibold">
+          <button className="bg-gray-800/80 hover:bg-gray-700/80 px-3 py-1 rounded-lg flex items-center gap-2 text-xs md:text-sm font-semibold">
             <PlusIcon className="w-4 h-4" /> Add
           </button>
         </header>
   
-        <main className="flex-grow px-6 pb-6 overflow-y-auto text-center">
-            <h1 className="text-3xl sm:text-4xl font-extrabold mb-2">What is Docker?</h1>
-            <h2 className="text-lg sm:text-xl text-cyan-400 font-semibold mb-6">Package, Ship, Run Anywhere.</h2>
-            <div className="bg-gray-900/60 backdrop-blur-lg p-5 rounded-2xl text-left mb-4 text-sm leading-relaxed">
+        <main className="flex-grow px-4 pb-4 overflow-y-auto text-center">
+            <h1 className="text-xl sm:text-4xl font-extrabold mb-2">What is Docker?</h1>
+            <h2 className="text-sm sm:text-xl text-cyan-400 font-semibold mb-2">Package, Ship, Run Anywhere.</h2>
+            <div className="bg-gray-900/60 backdrop-blur-lg p-5 rounded-2xl text-left mb-2 text-xs md:text-sm leading-relaxed">
               <p className="text-gray-200">
                 Docker is an open-source platform that automates the deployment of applications inside lightweight, portable containers. These containers package up an application with all of its dependencies, such as libraries and other resources, ensuring that the application runs quickly and reliably in any computing environment. This solves the classic problem of 'it works on my machine' by providing a consistent environment from development to production.
               </p>
@@ -90,7 +94,7 @@ const TopicsScreen: React.FC = () => (
 
 
 const NotificationsScreen: React.FC = () => (
-    <div className="w-full h-full bg-gray-900 text-white pt-14 flex flex-col animate-screen-in">
+    <div className="w-full h-full bg-[linear-gradient(to_bottom,#00172d,#000000)] text-white pt-14 flex flex-col animate-screen-in">
         <h1 className="text-2xl font-bold mb-6 px-6 flex-shrink-0">Notifications</h1>
         <main className="flex-grow px-6 pb-6 overflow-y-auto">
             <ul className="space-y-3">
@@ -207,10 +211,10 @@ export default function PhoneScroll() {
     <section className="relative text-white" style={{ height: "550vh" }}>
       <div ref={containerRef} className="h-screen w-full flex items-center justify-center overflow-hidden">
         
-        <div id="intro-text-1" className="absolute text-transparent text-center text-xl md:text-5xl bg-clip-text font-bold text-gray-300 max-w-5xl px-4 bg-gradient-to-r from-cyan-400 to-purple-500">
-            One brain was always lesser to contain the whole knowledge...
+        <div id="intro-text-1" className="absolute text-transparent text-center text-2xl md:text-5xl bg-clip-text font-bold text-gray-300 max-w-5xl px-4 bg-gradient-to-r from-cyan-400 to-purple-500">
+            One brain was always less to contain the whole knowledge...
         </div>
-        <div id="intro-text-2" className="absolute text-transparent text-center text-3xl md:text-5xl bg-clip-text font-bold text-gray-300 max-w-2xl px-4 bg-gradient-to-r from-cyan-400 to-purple-500">
+        <div id="intro-text-2" className="absolute text-transparent text-center text-2xl md:text-5xl bg-clip-text font-bold text-gray-300 max-w-2xl px-4 bg-gradient-to-r from-cyan-400 to-purple-500">
             So here is the second one for you...
         </div>
 

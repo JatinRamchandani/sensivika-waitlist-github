@@ -50,12 +50,12 @@ const HomeScreen: React.FC = () => (
 );
 
 const TopicsScreen: React.FC = () => (
-    <div className="w-full h-full text-white overflow-hidden animate-screen-in" style={{ 
+    <div className="w-full h-full bg-[linear-gradient(to_bottom,#00172d,#000000)] text-white overflow-hidden animate-screen-in" style={{ 
         backgroundImage: 'url(https://images.unsplash.com/photo-1611800063683-1658d55b38a7?q=80&w=800&auto=format&fit=crop)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
     }}>
-      <div className="pt-14 flex flex-col h-full bg-black/50 backdrop-blur-sm">
+      <div className="pt-14 bg-[linear-gradient(to_bottom,#00172d,#000000)] flex flex-col h-full bg-black/50 backdrop-blur-sm">
         <header className="flex items-center gap-2 mb-4 px-6 flex-shrink-0">
           <div className="bg-indigo-600 px-3 py-1 rounded-lg flex items-center gap-2 text-xs md:text-sm font-semibold">
             <span>Docker</span>
